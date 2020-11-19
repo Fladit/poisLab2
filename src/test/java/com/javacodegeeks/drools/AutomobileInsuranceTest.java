@@ -9,16 +9,12 @@ import org.kie.api.runtime.KieSession;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.junit.Assert.*;
 
-class AutomobileInsuranceTest {
+public class AutomobileInsuranceTest {
     @Test
-    public void checkInfo() {
-
-    }
-
-    public static void main(String[] args) {
+    public void checkInfo() throws Exception {
         try {
             HashMap<String, Double> checkPrice = new HashMap<>();
             checkPrice.put("Ivan", 40000.0);
@@ -48,12 +44,10 @@ class AutomobileInsuranceTest {
                     answer[0] = false;
                 }
             });
-            System.out.println(answer[0]);
             Assert.assertEquals(answer[0], true);
 
         } catch (Throwable t) {
             t.printStackTrace();
         }
     }
-
 }
