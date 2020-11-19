@@ -1,0 +1,76 @@
+package com.javacodegeeks.drools;
+global String topicLevel
+
+rule "First age rule"
+when
+$autoInsurance : AutomobileInsurance( clientAge > 60 )
+then
+//System.out.println("1");
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 2);
+end
+
+rule "Second age rule"
+when
+$autoInsurance : AutomobileInsurance( clientAge > 40 && clientAge < 60)
+then
+//System.out.println("2");
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 1.5);
+end
+
+rule "First Driving Experience rule"
+when
+$autoInsurance : AutomobileInsurance( ageDrivingExperience <= 5 )
+then
+//System.out.println("3 " + $autoInsurance.getFirstName());
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 2);
+end
+
+rule "Second Driving Experience rule"
+when
+$autoInsurance : AutomobileInsurance( ageDrivingExperience > 5 && ageDrivingExperience < 15 )
+then
+//System.out.println("4");
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 1.5);
+end
+
+rule "First Engine Power rule"
+when
+$autoInsurance : AutomobileInsurance(enginePower >= 150 && enginePower < 250)
+then
+//System.out.println("3 " + $autoInsurance.getFirstName());
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 1.5);
+end
+
+rule "Second Engine Power rule"
+when
+$autoInsurance : AutomobileInsurance(enginePower >= 250 && enginePower < 500)
+then
+//System.out.println("3 " + $autoInsurance.getFirstName());
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 2);
+end
+
+rule "Second Car age rule"
+when
+$autoInsurance : AutomobileInsurance( carAge >= 10 && carAge < 20 )
+then
+//System.out.println("3 " + $autoInsurance.getFirstName());
+$autoInsurance.setCoefficient($autoInsurance.getCoefficient() * 2);
+end
+
+rule "Increase price"
+when
+$autoInsurance : AutomobileInsurance( coefficient > 1 )
+then
+$autoInsurance.setDrivingInsurancePrice($autoInsurance.getDrivingInsurancePrice() * $autoInsurance.getCoefficient());
+System.out.println($autoInsurance.getInsuranseInfo());
+end
+
+rule "Show price"
+when
+$autoInsurance : AutomobileInsurance( coefficient == 1 )
+then
+$autoInsurance.setDrivingInsurancePrice($autoInsurance.getDrivingInsurancePrice() * $autoInsurance.getCoefficient());
+System.out.println($autoInsurance.getInsuranseInfo());
+end
+
+
